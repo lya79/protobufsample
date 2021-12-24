@@ -4,7 +4,7 @@
 網址:  https://nodejs.org/
 
 ## 1.2. 安裝 protobuf
-將下載後的執行檔路徑 `C:\Users\USER\protoc-3.19.1-win64\bin`添加至 `系統變數`的 `PATH`裡面.
+下載後解壓縮將裡面 `bin`目錄的 `protoc.exe`, 放置到此專案的 `bin`目錄底下`.
 
 網址: https://github.com/protocolbuffers/protobuf/releases
 
@@ -14,6 +14,7 @@
 如果是 clone這個專案則只需要執行安裝就好
 ```shell
 npm install
+npm install -g protobufjs
 ```
 
 ### 方法二(在新專案時使用)
@@ -33,6 +34,11 @@ npm uninstall protobufjs # 移除 protobufjs
 npm uninstall protobufjs --save  # 更新 package.json
 ```
 
+## 1.4. 安裝 protoc-gen-go
+```shell
+go get -u github.com/golang/protobuf/protoc-gen-go
+```
+
 # 2. 產生 protobuf檔案
 
 撰寫好 .proto檔案後即可參考下列範例指令產生 protobuf檔案.
@@ -40,14 +46,14 @@ npm uninstall protobufjs --save  # 更新 package.json
 
 ```shell
 # 範例: 產生 ts的 proto
-pbjs -t static-module -w commonjs -o ./dist/user.js ./proto/user.proto
-pbts -o ./dist/user.d.ts ./dist/user.js
+pbjs -t static-module -w commonjs -o .\dist\user.js .\proto\user.proto
+pbts -o .\dist\user.d.ts .\dist\user.js
 
 # 範例: 產生 golang的 proto
-protoc --go_out=./dist/ ./proto/user.proto
+.\bin\protoc-3.19.1\protoc.exe --go_out=.\dist\ .\proto\user.proto
 
 # 範例: 產生 golang使用 grpc時的 proto
-protoc --go_out=plugins=grpc:./dist/ ./proto/grpcUser.proto
+.\bin\protoc-3.19.1\protoc.exe --go_out=plugins=grpc:.\dist\ .\proto\grpcUser.proto
 ```
 
 > 備註: 如果 js或 ts需要使用 grpc則需要另外找方法處理. 
