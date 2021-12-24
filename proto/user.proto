@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option go_package = ".;user"; // golang的 package名稱
+package user;
+
+message GetInfoRequest {
+  string userID = 1;
+}
